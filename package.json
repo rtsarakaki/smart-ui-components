@@ -1,0 +1,75 @@
+{
+  "name": "smart-ui-components",
+  "version": "1.0.0",
+  "description": "Reusable React UI controls — DataGrid with native sort, pagination, and row actions",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "type-check": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:check": "eslint src --ext .ts,.tsx --max-warnings 0",
+    "quality": "npm run type-check && npm run lint:check && npm test",
+    "release": "semantic-release",
+    "release:dry-run": "semantic-release --dry-run"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.0",
+    "@semantic-release/npm": "^13.1.5",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@typescript-eslint/eslint-plugin": "^8.39.1",
+    "@typescript-eslint/parser": "^8.39.1",
+    "@vitest/coverage-v8": "^3.0.8",
+    "eslint": "^9.33.0",
+    "jsdom": "^26.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "semantic-release": "^25.0.8",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rtsarakaki/smart-ui-components.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "keywords": [
+    "react",
+    "ui",
+    "datagrid",
+    "pagination",
+    "typescript",
+    "components"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

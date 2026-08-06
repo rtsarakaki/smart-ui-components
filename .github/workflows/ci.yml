@@ -1,0 +1,80 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "22"
+
+jobs:
+  quality-checks:
+    name: Quality Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --prefer-offline --no-audit
+      - run: npm run type-check
+      - run: npm run lint:check
+      - run: npm test -- --coverage
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-files
+          path: dist/
+          retention-days: 30
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: [quality-checks]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@latest
+      - run: npm ci --prefer-offline --no-audit
+      - run: npm run build
+      - name: Publish to npm (trusted publishing)
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view "smart-ui-components@${VERSION}" version 2>/dev/null; then
+            echo "Version ${VERSION} already on npm"
+          else
+            npm publish --provenance --access public
+          fi
+          npm dist-tag add "smart-ui-components@${VERSION}" latest
+      - name: Create GitHub release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          gh release view "v${VERSION}" 2>/dev/null || gh release create "v${VERSION}" --title "v${VERSION}" --generate-notes
+      - name: Semantic release
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: "0"
+        run: npx semantic-release
