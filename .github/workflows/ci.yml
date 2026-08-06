@@ -60,12 +60,12 @@ jobs:
       - name: Publish to npm (trusted publishing)
         run: |
           VERSION=$(node -p "require('./package.json').version")
-          if npm view "smart-ui-components@${VERSION}" version 2>/dev/null; then
+          if npm view "@arqueosfera/smart-ui-components@${VERSION}" version 2>/dev/null; then
             echo "Version ${VERSION} already on npm"
           else
             npm publish --provenance --access public
           fi
-          npm dist-tag add "smart-ui-components@${VERSION}" latest
+          npm dist-tag add "@arqueosfera/smart-ui-components@${VERSION}" latest
       - name: Create GitHub release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

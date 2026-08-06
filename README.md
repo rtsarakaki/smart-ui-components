@@ -1,4 +1,4 @@
-# smart-ui-components
+# @arqueosfera/smart-ui-components
 
 Reusable React UI controls extracted for Archsphere and other apps.
 
@@ -10,7 +10,7 @@ Reusable React UI controls extracted for Archsphere and other apps.
 - Receives a dataset (`rows`) and declarative `columns`
 
 ```tsx
-import { DataGrid } from "smart-ui-components";
+import { DataGrid } from "@arqueosfera/smart-ui-components";
 
 <DataGrid
   rows={items}
@@ -58,4 +58,4 @@ Push to `main` runs GitHub Actions: quality checks, then npm publish with proven
    - Environment: leave empty unless you use one
 3. Push to `main` (or re-run the Release job).
 
-Until the package is on npm, Archsphere may depend via `file:../../smart-ui-components`. After `1.0.0` is published, switch to `"smart-ui-components": "^1.0.0"`.
+Until the package is on npm, Archsphere may depend via `file:../../smart-ui-components`. After `1.0.0` is published, switch to `"@arqueosfera/smart-ui-components": "^1.0.0"`.

@@ -1,6 +1,6 @@
 {
-  "name": "smart-ui-components",
-  "version": "1.0.0",
+  "name": "@arqueosfera/smart-ui-components",
+  "version": "1.0.1",
   "description": "Reusable React UI controls — DataGrid with native sort, pagination, and row actions",
   "type": "module",
   "main": "./dist/index.js",
@@ -26,6 +26,7 @@
     "lint": "eslint src --ext .ts,.tsx --max-warnings 0",
     "lint:check": "eslint src --ext .ts,.tsx --max-warnings 0",
     "quality": "npm run type-check && npm run lint:check && npm run test:coverage",
+    "publish:local": "npm publish --access public --registry https://registry.npmjs.org",
     "release": "semantic-release",
     "release:dry-run": "semantic-release --dry-run"
   },
@@ -59,8 +60,7 @@
     "url": "git+https://github.com/rtsarakaki/smart-ui-components.git"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "keywords": [
     "react",
