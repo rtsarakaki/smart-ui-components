@@ -16,7 +16,7 @@ alwaysApply: false
 | [skill-routing.mdc](skill-routing.mdc) | Classify → load skills |
 | [clean-code.mdc](clean-code.mdc) | Guard clauses, immutability, naming |
 | [english-codebase.mdc](english-codebase.mdc) | English identifiers / commits |
-| [quality-gates.mdc](quality-gates.mdc) | ESLint, TSC, Vitest, CI |
+| [quality-gates.mdc](quality-gates.mdc) | ESLint, TSC, Vitest 80%, Husky pre-commit, CI |
 | [package-layout.mdc](package-layout.mdc) | Repo shape |
 | [mcp-credentials.mdc](mcp-credentials.mdc) | MCP-only Archsphere |
 | [dora-deploy.mdc](dora-deploy.mdc) | Deploy task on every push |

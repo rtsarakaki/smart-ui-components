@@ -17,14 +17,15 @@
     "LICENSE"
   ],
   "scripts": {
+    "prepare": "husky",
     "build": "tsc -p tsconfig.build.json",
     "type-check": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "lint": "eslint src --ext .ts,.tsx",
+    "lint": "eslint src --ext .ts,.tsx --max-warnings 0",
     "lint:check": "eslint src --ext .ts,.tsx --max-warnings 0",
-    "quality": "npm run type-check && npm run lint:check && npm test",
+    "quality": "npm run type-check && npm run lint:check && npm run test:coverage",
     "release": "semantic-release",
     "release:dry-run": "semantic-release --dry-run"
   },
@@ -45,6 +46,7 @@
     "@typescript-eslint/parser": "^8.39.1",
     "@vitest/coverage-v8": "^3.0.8",
     "eslint": "^9.33.0",
+    "husky": "^9.1.7",
     "jsdom": "^26.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

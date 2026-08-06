@@ -12,12 +12,13 @@ Run from repository root:
 
 | Command | Purpose |
 |---------|---------|
-| `npm run quality` | type-check + lint + tests |
-| `npm run test:coverage` | Vitest with coverage |
+| `npm run lint` | ESLint on `src/` (max-warnings 0) |
+| `npm run test:coverage` | Vitest with **80%** coverage gate |
+| `npm run quality` | type-check + lint + test:coverage |
 | `npm run build` | Emit `dist/` |
-| `npm run lint:check` | ESLint |
 
-**Never skip pre-commit / CI quality** (`--no-verify`) unless the user explicitly requests it.
+**Pre-commit (Husky):** `lint` + `test:coverage` — same pattern as Archsphere.  
+**Never skip hooks** (`--no-verify`) unless the user explicitly requests it.
 
 ## Agent layers
 

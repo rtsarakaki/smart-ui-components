@@ -36,8 +36,10 @@ import { DataGrid } from "smart-ui-components";
 ## Scripts
 
 - `npm run build` — emit `dist/`
-- `npm test` — Vitest
-- `npm run quality` — type-check + lint + tests
+- `npm run lint` — ESLint (max-warnings 0)
+- `npm run test:coverage` — Vitest with 80% coverage gate
+- `npm run quality` — type-check + lint + test:coverage
+- **Pre-commit (Husky):** runs `lint` + `test:coverage` (same as Archsphere)
 
 ## Agents
 

@@ -43,6 +43,42 @@ describe("sortRows", () => {
     const result = sortRows(rows, columns, { columnId: "title", direction: "desc" });
     expect(result.map((row) => row.title)).toEqual(["Charlie", "Bravo", "Alpha"]);
   });
+
+  it("sorts numeric values and nulls", () => {
+    type Scored = { id: string; score: number | null };
+    const scoredColumns: ReadonlyArray<DataGridColumn<Scored>> = [
+      {
+        id: "score",
+        header: "Score",
+        sortable: true,
+        getSortValue: (row) => row.score,
+        render: (row) => row.score,
+      },
+    ];
+    const scoredRows: ReadonlyArray<Scored> = [
+      { id: "1", score: 10 },
+      { id: "2", score: null },
+      { id: "3", score: 2 },
+      { id: "4", score: null },
+    ];
+
+    const asc = sortRows(scoredRows, scoredColumns, {
+      columnId: "score",
+      direction: "asc",
+    });
+    expect(asc.map((row) => row.score)).toEqual([2, 10, null, null]);
+
+    const desc = sortRows(scoredRows, scoredColumns, {
+      columnId: "score",
+      direction: "desc",
+    });
+    expect(desc.map((row) => row.score)).toEqual([null, null, 10, 2]);
+  });
+
+  it("returns a copy when column is not sortable", () => {
+    const result = sortRows(rows, columns, { columnId: "missing", direction: "asc" });
+    expect(result).toEqual(rows);
+  });
 });
 
 describe("nextSortState", () => {

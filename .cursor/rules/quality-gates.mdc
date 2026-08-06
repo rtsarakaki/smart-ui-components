@@ -1,14 +1,14 @@
 ---
-description: ESLint, TypeScript strict, Vitest coverage, and CI publish gates
+description: ESLint, TypeScript strict, Vitest coverage, Husky pre-commit, and CI publish gates
 alwaysApply: true
 ---
 
 # Quality gates
 
-- **ESLint**: flat config on `src/` — rejects explicit `any`; run `npm run lint:check`.
+- **ESLint**: flat config on `src/` — rejects explicit `any`; run `npm run lint` / `npm run lint:check`.
 - **TypeScript**: `strict: true` in `tsconfig.json`; follow `typescript-standards.mdc`.
-- **Tests**: Vitest; run `npm test` / `npm run test:coverage` before commit when shipping code.
-- **Quality script**: `npm run quality` = type-check + lint + tests.
+- **Pre-commit** (Husky): runs `npm run lint` then `npm run test:coverage` — commits fail below **80%** coverage (lines/branches/functions/statements).
+- **Quality script**: `npm run quality` = type-check + lint + test:coverage.
 - **CI**: push to `main` runs quality then npm publish (trusted publishing) — see `.github/workflows/ci.yml`.
 - Do not skip hooks (`--no-verify`) unless the user explicitly requests it.
 - Do not publish manually with extracted npm tokens when CI trusted publishing is the agreed path.
