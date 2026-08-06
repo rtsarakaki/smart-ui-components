@@ -2,7 +2,9 @@
 
 Reusable React UI controls extracted for Archsphere and other apps.
 
-## First component: `DataGrid`
+## Components
+
+### `DataGrid`
 
 - Client-side **column sorting**
 - Built-in **pagination** (page + page size)
@@ -40,10 +42,33 @@ import { DataGrid } from "@arqueosfera/smart-ui-components";
       visible: (row) => row.canEdit,
     },
   ]}
-  // Or host-owned markup:
-  // renderRowActions={(row) => <MyInlineActions row={row} />}
   actionLabels={{ /* … */ }}
   paginationLabels={{ /* … */ }}
+/>
+```
+
+### `DatasetPicker`
+
+Generic “choose one item from a dataset” field (participant picker pattern):
+
+- Trigger shows the selected item; button opens a modal
+- **Description** search field is always present
+- **Type** filter is optional (`typeOptions`)
+- Items are passed as a plain `items` dataset (`id`, `label`, `description?`, `type?`, `imageUrl?`)
+
+```tsx
+import { DatasetPicker } from "@arqueosfera/smart-ui-components";
+
+<DatasetPicker
+  fieldLabel="Responsible"
+  value={selectedId}
+  onChange={setSelectedId}
+  items={dataset}
+  typeOptions={[
+    { value: "partner", label: "Partner" },
+    { value: "stakeholder", label: "Stakeholder" },
+  ]}
+  labels={{ /* i18n strings */ }}
 />
 ```
 

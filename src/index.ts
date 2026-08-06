@@ -22,3 +22,17 @@ export type {
   ListPaginationLabels,
   SortDirection,
 } from "./dataGrid/types.js";
+export { DatasetPicker } from "./datasetPicker/DatasetPicker.js";
+export type { DatasetPickerProps } from "./datasetPicker/DatasetPicker.js";
+export {
+  filterDatasetPickerItems,
+  findDatasetPickerItem,
+  formatDatasetPickerRowLabel,
+  initialsFromLabel,
+} from "./datasetPicker/datasetPickerModel.js";
+export type {
+  DatasetPickerClassNames,
+  DatasetPickerItem,
+  DatasetPickerLabels,
+  DatasetPickerTypeOption,
+} from "./datasetPicker/datasetPickerModel.js";
