@@ -17,12 +17,35 @@ export type DataGridColumn<T> = {
   render: (row: T, absoluteIndex: number) => ReactNode;
 };
 
+export type DataGridRowActionTone = "default" | "danger";
+
+/**
+ * Declarative extra action button in the row actions cell
+ * (in addition to native edit/delete).
+ */
+export type DataGridRowAction<T> = {
+  id: string;
+  /** Accessible name (and default title). */
+  label: string | ((row: T) => string);
+  /** Optional visible caption next to the icon. */
+  shortLabel?: string | ((row: T) => string);
+  icon?: ReactNode | ((row: T) => ReactNode);
+  onClick: (row: T) => void;
+  visible?: boolean | ((row: T) => boolean);
+  disabled?: boolean | ((row: T) => boolean);
+  tone?: DataGridRowActionTone | ((row: T) => DataGridRowActionTone);
+  title?: string | ((row: T) => string);
+};
+
+export type DataGridRowActionsPlacement = "before-native" | "after-native";
+
 export type DataGridClassNames = {
   root: string;
   head: string;
   list: string;
   row: string;
   rowClickable: string;
+  rowSelected: string;
   cell: string;
   cellId: string;
   cellActions: string;
@@ -35,6 +58,9 @@ export type DataGridClassNames = {
   iconButton: string;
   deleteButton: string;
   icon: string;
+  extraAction: string;
+  extraActionDanger: string;
+  extraActionLabel: string;
 };
 
 export type ListPaginationLabels = {
@@ -50,8 +76,8 @@ export type ListPaginationLabels = {
 };
 
 export type DataGridActionLabels<T> = {
-  editAriaLabel: (row: T) => string;
-  deleteAriaLabel: (row: T) => string;
+  editAriaLabel?: (row: T) => string;
+  deleteAriaLabel?: (row: T) => string;
   editTitle?: string;
   deleteTitle?: string;
   actionsHeader?: ReactNode;

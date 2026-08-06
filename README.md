@@ -7,6 +7,8 @@ Reusable React UI controls extracted for Archsphere and other apps.
 - Client-side **column sorting**
 - Built-in **pagination** (page + page size)
 - Native **edit** and **delete** action buttons
+- **Extra / custom row actions** (`extraActions` or `renderRowActions`) for screens like participants
+- Optional **selected row** highlight via `selectedRowId` / `getRowClassName`
 - Receives a dataset (`rows`) and declarative `columns`
 
 ```tsx
@@ -25,9 +27,21 @@ import { DataGrid } from "@arqueosfera/smart-ui-components";
   ]}
   getRowId={(row) => row.id}
   ariaLabel="Items"
+  selectedRowId={selectedId}
   onEdit={(row) => open(row)}
   onDelete={(row) => confirmDelete(row)}
   onRowActivate={(row) => open(row)}
+  extraActions={[
+    {
+      id: "prompt",
+      label: (row) => `Generate prompt for ${row.title}`,
+      shortLabel: "1:1",
+      onClick: (row) => generatePrompt(row),
+      visible: (row) => row.canEdit,
+    },
+  ]}
+  // Or host-owned markup:
+  // renderRowActions={(row) => <MyInlineActions row={row} />}
   actionLabels={{ /* … */ }}
   paginationLabels={{ /* … */ }}
 />

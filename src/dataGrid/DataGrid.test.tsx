@@ -177,4 +177,86 @@ describe("DataGrid", () => {
     });
     expect(screen.getByText("1-3 of 3")).toBeTruthy();
   });
+
+  it("renders declarative extraActions and keeps native edit", () => {
+    const onPrompt = vi.fn();
+    const onEdit = vi.fn();
+    renderGrid({
+      onEdit,
+      extraActions: [
+        {
+          id: "prompt",
+          label: (row) => `Prompt ${row.title}`,
+          shortLabel: "1:1",
+          onClick: onPrompt,
+          visible: (row) => row.kind === "rule",
+        },
+        {
+          id: "result",
+          label: "Record result",
+          onClick: vi.fn(),
+          visible: false,
+        },
+      ],
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Prompt Zeta" }));
+    expect(onPrompt).toHaveBeenCalledWith(rows[0]);
+    expect(screen.queryByRole("button", { name: "Prompt Alpha" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Record result" })).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Edit Zeta" }));
+    expect(onEdit).toHaveBeenCalledWith(rows[0]);
+  });
+
+  it("renders custom renderRowActions without native actions", () => {
+    const onCustom = vi.fn();
+    renderGrid({
+      showEditAction: false,
+      showDeleteAction: false,
+      onEdit: undefined,
+      onDelete: undefined,
+      renderRowActions: (row) => (
+        <button type="button" onClick={() => onCustom(row)}>
+          Custom {row.title}
+        </button>
+      ),
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Custom Zeta" }));
+    expect(onCustom).toHaveBeenCalledWith(rows[0]);
+    expect(screen.queryByRole("button", { name: "Edit Zeta" })).toBeNull();
+  });
+
+  it("marks the selected row and merges getRowClassName", () => {
+    renderGrid({
+      selectedRowId: "2",
+      getRowClassName: (row) => (row.kind === "skill" ? "host-owned" : undefined),
+      hostClassNames: { rowSelected: "host-selected" },
+    });
+    const selected = screen
+      .getAllByRole("listitem")
+      .find((element) => element.textContent?.includes("Alpha"));
+    expect(selected?.className).toContain("host-selected");
+    expect(selected?.className).toContain("host-owned");
+    expect(selected?.getAttribute("aria-selected")).toBe("true");
+  });
+
+  it("places extra actions after native when requested", () => {
+    renderGrid({
+      rowActionsPlacement: "after-native",
+      extraActions: [
+        {
+          id: "prompt",
+          label: "Prompt Zeta",
+          onClick: vi.fn(),
+        },
+      ],
+    });
+    const actionsCell = screen.getByRole("button", { name: "Edit Zeta" }).parentElement;
+    expect(actionsCell).toBeTruthy();
+    const buttons = Array.from(actionsCell!.querySelectorAll("button")).map((button) =>
+      button.getAttribute("aria-label")
+    );
+    expect(buttons.indexOf("Edit Zeta")).toBeLessThan(buttons.indexOf("Prompt Zeta"));
+  });
 });
