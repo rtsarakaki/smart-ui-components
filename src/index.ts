@@ -5,7 +5,7 @@ export {
   paginateItems,
   totalListPages,
   visibleListPages,
-} from "./pagination/listPagination.js";
+} from "./pagination/listPageMath.js";
 export { ListPagination } from "./pagination/ListPagination.js";
 export type { ListPaginationProps } from "./pagination/ListPagination.js";
 export { DataGrid } from "./dataGrid/DataGrid.js";

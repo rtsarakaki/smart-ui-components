@@ -12,7 +12,7 @@ import {
   DEFAULT_LIST_PAGE_SIZE,
   LIST_PAGE_SIZE_OPTIONS,
   paginateItems,
-} from "../pagination/listPagination.js";
+} from "../pagination/listPageMath.js";
 import { ListPagination } from "../pagination/ListPagination.js";
 import { nextSortState, sortRows } from "./sortRows.js";
 import type {

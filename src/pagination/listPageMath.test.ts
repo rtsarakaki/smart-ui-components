@@ -4,9 +4,9 @@ import {
   paginateItems,
   totalListPages,
   visibleListPages,
-} from "./listPagination.js";
+} from "./listPageMath.js";
 
-describe("listPagination", () => {
+describe("listPageMath", () => {
   it("computes total pages", () => {
     expect(totalListPages(25, 10)).toBe(3);
     expect(totalListPages(0, 10)).toBe(1);

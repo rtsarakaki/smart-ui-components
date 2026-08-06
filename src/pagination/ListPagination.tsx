@@ -7,7 +7,7 @@ import {
   clampListPage,
   totalListPages,
   visibleListPages,
-} from "./listPagination.js";
+} from "./listPageMath.js";
 import type { ListPaginationLabels } from "../dataGrid/types.js";
 
 export type ListPaginationProps = {

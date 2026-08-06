@@ -12,7 +12,7 @@ This package is a **reusable UI library**, not an app. Consumers (Archsphere, sa
 
 - Group by control: `src/dataGrid/`, `src/pagination/`, `src/icons/`.
 - Export public API from `src/index.ts` only.
-- Pure helpers live next to the control (e.g. `sortRows.ts`, `listPagination.ts`) — easy to unit test without React.
+- Pure helpers live next to the control (e.g. `sortRows.ts`, `listPageMath.ts`) — easy to unit test without React.
 
 ## API design
 
