@@ -1,0 +1,14 @@
+---
+description: CI/CD for npm publish with provenance (trusted publishing)
+globs: .github/**/*
+alwaysApply: false
+---
+
+# GitHub Actions / npm publish
+
+- Workflow: `.github/workflows/ci.yml` — quality on PR/push; release job on `main` push.
+- Release: build → `npm publish --provenance --access public` → GitHub release → semantic-release.
+- Prefer **trusted publishing** (OIDC) over long-lived `NPM_TOKEN` in secrets.
+- Conventional Commits drive semantic-release (see `commit-messages.mdc` and `.releaserc.json`).
+- Do not force-publish broken builds; fix quality job first.
+- First publish requires npm package Trusted Publisher linked to this repo + `ci.yml`.

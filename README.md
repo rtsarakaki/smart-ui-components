@@ -39,6 +39,10 @@ import { DataGrid } from "smart-ui-components";
 - `npm test` — Vitest
 - `npm run quality` — type-check + lint + tests
 
+## Agents
+
+See [AGENTS.md](./AGENTS.md) and `.cursor/rules/index.mdc` for curated Cursor rules/skills (subset of Archsphere, adapted for this npm UI library).
+
 ## Publish
 
 Push to `main` runs GitHub Actions: quality checks, then npm publish with provenance (trusted publishing) + GitHub release + semantic-release, same pattern as `smart-value-objects`.

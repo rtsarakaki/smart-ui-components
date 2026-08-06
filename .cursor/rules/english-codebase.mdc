@@ -1,0 +1,10 @@
+---
+description: English identifiers, routes, and UI copy defaults
+alwaysApply: true
+---
+
+# English-only code
+
+- Write source code in **English**: variable names, functions, types, file names, comments, and commit messages.
+- Name React components in **English** PascalCase (`SignIn`, `ProjectsBoard`), never mixed-language names.
+- Default **fallback** UI strings and `aria-label` text in English; hosts pass localized labels via props (no i18n message catalogs in this package).

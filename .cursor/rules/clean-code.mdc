@@ -1,0 +1,29 @@
+---
+description: Clean Code — descriptive names, guard clauses, no else, immutability
+alwaysApply: true
+---
+
+# Clean Code and functional style
+
+## Descriptive names
+
+- Names must reveal intent: `activeWorkspaceOwnerId`, not `id` or `data`.
+- Functions are verbs (`resolveActiveWorkspaceOwnerId`, `parseBurndownInstant`).
+- Booleans read as questions (`isAuthenticated`, `hasPendingTasks`, `canEditProject`).
+- Avoid abbreviations except well-known ones (`id`, `url`, `api`).
+
+## Guard clauses — no nested ifs, no else
+
+- Validate preconditions first and **return early**; keep the happy path unindented.
+- Prefer **flat control flow** over `if/else` chains and nested blocks.
+- Replace `else` with an early return, a lookup map, or a single final expression.
+
+## Immutability
+
+- Default to **`const`**; never use `let` when reassignment is avoidable.
+- Do not mutate arguments, arrays, or objects — return new values.
+- Use `ReadonlyArray<T>`, `Readonly<Record<...>>`, and spread/map/filter/reduce.
+- Extract **pure helpers** for parsing, validation, and transforms; keep I/O at boundaries.
+- React state updates: always produce new objects/arrays, never mutate state in place.
+
+Code examples: see [clean-code-examples.mdc](clean-code-examples.mdc) when editing TypeScript.

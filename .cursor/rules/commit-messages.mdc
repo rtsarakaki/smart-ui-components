@@ -1,0 +1,92 @@
+---
+description: Conventional Commits in English for semantic-release
+alwaysApply: false
+---
+
+# Commit Messages Rule
+
+## **Commit Messages Must Be in English**
+
+- **All commit messages** must be written in English, regardless of the project language or team location
+- **Conventional Commits** format is mandatory
+- **Descriptive and clear** messages that explain what and why, not how
+
+## **Format Requirements**
+
+### **Structure**
+```
+<type>(<scope>): <description>
+
+[optional body]
+
+[optional footer]
+```
+
+### **Types**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `style`: Code style changes (formatting, etc.)
+- `refactor`: Code refactoring
+- `test`: Adding or updating tests
+- `chore`: Maintenance tasks
+
+### **Examples**
+
+#### ✅ **Good Examples**
+```bash
+feat(auth): add JWT token validation
+fix(api): resolve user creation race condition
+docs(readme): update installation instructions
+refactor(domain): extract user validation logic
+test(entities): add unit tests for User entity
+chore(deps): update TypeScript to 5.2.0
+```
+
+#### ❌ **Bad Examples**
+```bash
+# Portuguese
+feat: adiciona validação de token JWT
+fix: corrige problema na criação de usuário
+
+# Too vague
+fix: bug fix
+feat: new feature
+update: stuff
+
+# Too long description
+feat(auth): add JWT token validation with refresh mechanism and automatic renewal
+```
+
+## **Why English?**
+
+- **Global Collaboration**: English is the standard for international development
+- **Open Source**: Most open source projects use English
+- **Tool Integration**: Many tools and platforms expect English commits
+- **Professional Standard**: Industry best practice for code repositories
+- **Searchability**: Easier to search and filter commit history
+
+## **Implementation**
+
+- **Pre-commit Hooks**: Use commitlint to enforce this rule
+- **Code Review**: Reject commits with non-English messages
+- **Team Training**: Ensure all team members understand this requirement
+- **Documentation**: Include this rule in project documentation
+
+## **Exceptions**
+
+- **User-facing text**: Can be in the project's target language
+- **Comments in code**: Can be in the team's preferred language
+- **Documentation**: Can be in the project's target language
+- **Commit messages**: **MUST** be in English
+
+## **Tools**
+
+- **Commitlint**: Configure to enforce Conventional Commits
+- **Husky**: Pre-commit hooks to validate messages
+- **Git Hooks**: Local validation before push
+- **CI/CD**: Automated validation in pipelines
+description:
+globs:
+alwaysApply: false
+---

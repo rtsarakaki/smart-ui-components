@@ -1,0 +1,22 @@
+---
+description: Package layout for smart-ui-components
+alwaysApply: true
+---
+
+# Package layout
+
+Single npm package (not a monorepo app):
+
+```
+src/
+  dataGrid/       # DataGrid + sort helpers
+  pagination/     # ListPagination + pure pagination helpers
+  icons/          # Shared action icons
+  index.ts        # Public exports
+dist/             # tsc build output (published)
+.github/workflows/ci.yml
+```
+
+- Run quality from **repo root**: `npm run quality`, `npm run build`, `npm test`.
+- Publish only via CI on `main` (trusted publishing) unless the user explicitly asks otherwise.
+- Keep peer deps minimal: `react`, `react-dom`.

@@ -1,0 +1,23 @@
+---
+description: Vitest + Testing Library for pure helpers and React components
+globs: src/**/*.{test,spec}.{ts,tsx}
+alwaysApply: false
+---
+
+# Testing with Vitest
+
+- **Primary focus**: pure helpers (sort, pagination) and component behavior (sort click, pagination, actions).
+- Co-locate tests beside source: `DataGrid.tsx` + `DataGrid.test.tsx`, `sortRows.ts` + `sortRows.test.ts`.
+- Use Testing Library: assert via **roles, labels, and visible text** — not implementation details.
+- Call `cleanup()` between component tests when needed (shared DOM).
+- Setup: `vitest.setup.ts` + jsdom environment.
+- Prefer table-driven cases for pure functions.
+- After adding code run `npm run test:coverage` (or `npm run quality`) from repo root.
+
+```ts
+describe("sortRows", () => {
+  it("sorts ascending by column", () => {
+    expect(sortRows(rows, columns, { columnId: "title", direction: "asc" })[0]?.title).toBe("Alpha");
+  });
+});
+```

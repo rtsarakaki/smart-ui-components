@@ -1,0 +1,36 @@
+---
+description: React library components — presentational API, host classes, a11y
+globs: src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# React UI components (library)
+
+This package is a **reusable UI library**, not an app. Consumers (Archsphere, satellites) own theme CSS and domain logic.
+
+## Structure
+
+- Group by control: `src/dataGrid/`, `src/pagination/`, `src/icons/`.
+- Export public API from `src/index.ts` only.
+- Pure helpers live next to the control (e.g. `sortRows.ts`, `listPagination.ts`) — easy to unit test without React.
+
+## API design
+
+- **Presentational**: no Supabase, no fetch, no domain types from Archsphere.
+- Receive **data** (`rows`) and **callbacks** (`onEdit`, `onDelete`, `onRowActivate`).
+- All user-visible strings via **label props** (i18n stays in the host app).
+- Support **`hostClassNames` / `classNames`** so hosts can map to their BEM tokens (e.g. `wbs-home__*`).
+- Mark interactive modules with `"use client"` when they use hooks (Next.js App Router consumers).
+
+## Accessibility
+
+- Prefer semantic roles (`table`/`list`, buttons with `aria-label`).
+- Sortable headers are real `<button>`s with clear labels.
+- Keyboard: Enter/Space on activatable rows when `onRowActivate` is set.
+- Stop propagation on action cells so row activate does not fire with edit/delete.
+
+## Do not
+
+- Ship opinionated purple/dark “AI default” skins as the only look — stay host-themeable.
+- Put ConfirmDialog / toast / routing inside the lib unless extracted as a generic primitive by request.
+- Add peer dependencies beyond React unless explicitly approved.

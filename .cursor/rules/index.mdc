@@ -1,0 +1,56 @@
+---
+description: Index of Cursor rules and agent skills for smart-ui-components
+alwaysApply: false
+---
+
+# Cursor rules & skills index
+
+## Agent entry point
+
+- **[AGENTS.md](../../AGENTS.md)** — project context, commands, selection rationale
+
+## Always-applied rules
+
+| Rule | Role |
+|------|------|
+| [skill-routing.mdc](skill-routing.mdc) | Classify → load skills |
+| [clean-code.mdc](clean-code.mdc) | Guard clauses, immutability, naming |
+| [english-codebase.mdc](english-codebase.mdc) | English identifiers / commits |
+| [quality-gates.mdc](quality-gates.mdc) | ESLint, TSC, Vitest, CI |
+| [package-layout.mdc](package-layout.mdc) | Repo shape |
+| [mcp-credentials.mdc](mcp-credentials.mdc) | MCP-only Archsphere |
+| [dora-deploy.mdc](dora-deploy.mdc) | Deploy task on every push |
+
+## Scoped rules
+
+| Rule | When |
+|------|------|
+| [typescript-standards.mdc](typescript-standards.mdc) | `src/**/*.{ts,tsx}` |
+| [testing-vitest.mdc](testing-vitest.mdc) | `*.test.ts(x)` |
+| [react-components.mdc](react-components.mdc) | Library component API |
+| [clean-code-examples.mdc](clean-code-examples.mdc) | Examples while editing TS |
+| [archsphere-logbook.mdc](archsphere-logbook.mdc) | Logbook writes |
+| [github-actions.mdc](github-actions.mdc) | `.github/**` |
+| [commit-messages.mdc](commit-messages.mdc) | Conventional Commits |
+| [cursor_rules.mdc](cursor_rules.mdc) / [self_improve.mdc](self_improve.mdc) | Meta |
+
+## Skills (loaded via skill-routing)
+
+| Skill | Use when |
+|-------|----------|
+| skill-routing | Every new/shifted request |
+| product-management | New component capability / stories |
+| ux-design | Interaction, a11y, visual contract |
+| design-doc | Complex compound controls |
+| solution-architecture | Public API / packaging TO BE |
+| security-architecture | XSS surface, unsafe HTML, supply chain |
+| software-development | Implement / refactor |
+| qa-testing | Tests + coverage |
+| delivery-reviewer | Peer review before ship |
+| archsphere-integration | MCP project/task/logbook |
+| git-commit | Commit / push |
+| agent-artifacts-documentation | Catalog docs for rules/skills |
+
+## Intentionally omitted (Archsphere app-only)
+
+Next.js App Router, Supabase, monorepo layout, i18n message files, domain lifecycle PATCH, API route handlers, commercial-sales, content-writing, Sem Bala de Prata, people-development, business-architecture, create-project, linux-disk-cleanup, smart-value-objects-consumer.

@@ -1,0 +1,15 @@
+---
+description: When writing Archsphere project status or saving WBS artifacts via MCP/API, append logbook entries — never replace history on update_project
+alwaysApply: false
+---
+
+# Archsphere logbook (append-only)
+
+When updating Archsphere projects (MCP or Integration API):
+
+1. **Append** status notes with `append_logbook_entry` — one call per event.
+2. **Never** send `logbook.entries` on `update_project` / PATCH project — it replaces the full list.
+3. **Never** use `update_logbook_entry` to record new progress — only to fix a typo on an existing line.
+4. After `upsert_wbs_artifact` or `upsertWbsArtifact`, call `append_logbook_entry` in a **separate** step with a one-line summary.
+
+Full workflow: `.cursor/skills/archsphere-integration/SKILL.md` (Logbook section).

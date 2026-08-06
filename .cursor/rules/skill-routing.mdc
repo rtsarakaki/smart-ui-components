@@ -1,0 +1,23 @@
+---
+description: On every new request, evaluate and read applicable project skills before acting
+alwaysApply: true
+---
+
+# Skill routing (mandatory)
+
+At the **start of every new user request** (and when the request **changes direction**):
+
+1. **Classify** the request (feature, UI, code, architecture, Archsphere data, git, question-only, etc.).
+2. **Read** [skill-routing/SKILL.md](../skills/skill-routing/SKILL.md) — routing matrix, handoffs, anti-patterns.
+3. **Read** each selected skill's `SKILL.md` before acting on that concern.
+4. **Follow handoff order** when multiple skills apply (e.g. PM → UX → dev — not dev-first on greenfield UI).
+
+## Token-aware defaults
+
+| Situation | Minimum skills |
+|-----------|----------------|
+| Question-only (no code/data change) | None — unless the answer requires a skill workflow |
+| Trivial fix (typo, one-liner) | software-development (+ qa-testing if prod code changed) |
+| Code change / refactor / feature | See full matrix in skill-routing SKILL.md |
+
+Do not skip evaluation on substantial work. Do not load the full delivery chain for trivial fixes.

@@ -1,0 +1,42 @@
+---
+description: Mandatory DORA deploy registration on every git push — Archsphere implant_task
+alwaysApply: true
+---
+
+# DORA deploy (mandatory)
+
+Every **successful push** to the tracked remote must be registered in Archsphere as a completed **`kind: deploy`** task (`implant_task`) so **Deployment Frequency (DF)** metrics stay accurate.
+
+## When to act
+
+| Moment | Action |
+|--------|--------|
+| **Before editing** (work may ship) | Phase 1: `create_task` `kind: deploy`, `status: pending` — track `deployTaskId` |
+| **After successful push** | Phase 2: `update_task` metadata → **`implant_task`** → `append_logbook_entry` |
+
+## What counts as a delivery
+
+- Library code, tests, deps, docs, **agent config** (`.cursor/`, skills, `AGENTS.md`), chore — **all count**
+- **Do not skip** because the change is “not production app code”
+
+## Opt-out
+
+Skip DORA registration **only** when the user **explicitly** says the push must not count (WIP branch, throwaway remote, “não contabilizar DORA”).
+
+## Target project (this workspace)
+
+- **Lib de componentes visuais do Archsphere**
+- Project id: `0005059b-c4d1-4140-a470-26af63f214b8`
+- Product: Arqueosfera (`925d6924-06b3-4954-87e8-685eaa1cb239`)
+- MCP server: `user-archsphere-pessoal`
+- Responsible for deploy tasks: Cursor — resolve id via `get_workspace_catalog` / `list_participants`
+
+## Bootstrap
+
+If deploy task creation fails (*requires implanted project*): ensure project has `deployDate`, then create the deploy task.
+
+## Full workflow
+
+- Skill: [archsphere-integration/SKILL.md](../skills/archsphere-integration/SKILL.md) — DORA deploy section
+- Skill: [git-commit/SKILL.md](../skills/git-commit/SKILL.md) — push phase 2
+- Policy (PT): [dora-deploy-policy.pt.md](../skills/archsphere-integration/dora-deploy-policy.pt.md)

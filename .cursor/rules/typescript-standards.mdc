@@ -1,0 +1,31 @@
+---
+description: Strict TypeScript — no any, explicit public API types
+globs: src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# TypeScript standards
+
+- Enable **strict** mode plus `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`.
+- Prefer relative imports with `.js` extension in emitted ESM source (`./sortRows.js`) — match existing package style.
+- Follow `clean-code.mdc` for naming, guard clauses, and immutability.
+
+## No `any` — everything typed
+
+- **Never** use `any`, `as any`, or untyped catch bindings (`catch (e)` → `catch (e: unknown)`).
+- Never use `@ts-ignore` or `@ts-expect-error` except with a comment explaining a verified compiler limitation.
+- Prefer **`unknown`** when the shape is not yet known, then narrow with type guards.
+- Type all function parameters and **return types** on **exported** functions and public component props.
+- Prefer **generics** for reusable UI (`DataGrid<T>`) over widening to `object`.
+- Use `ReadonlyArray<T>` and `Readonly<…>` for inputs that must not be mutated.
+- Prefer `satisfies` over widening assertions when checking literal shapes.
+
+```ts
+// ❌ any
+function getSortValue(row: any) {
+  return row.title;
+}
+
+// ✅ generic + typed column
+type Column<T> = { getSortValue?: (row: T) => string | number | null | undefined };
+```
