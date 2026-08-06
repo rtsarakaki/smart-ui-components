@@ -43,4 +43,13 @@ import { DataGrid } from "smart-ui-components";
 
 Push to `main` runs GitHub Actions: quality checks, then npm publish with provenance (trusted publishing) + GitHub release + semantic-release, same pattern as `smart-value-objects`.
 
-Configure the npm package for [trusted publishing](https://docs.npmjs.com/trusted-publishers) linked to this repository before the first release workflow.
+### First-time npm setup (required before CI can publish)
+
+1. Create the empty package on [npmjs.com](https://www.npmjs.com/) (or let the first publish create it if your account allows).
+2. Package settings → **Trusted Publishers** → add GitHub Actions:
+   - Repository: `rtsarakaki/smart-ui-components`
+   - Workflow: `ci.yml`
+   - Environment: leave empty unless you use one
+3. Push to `main` (or re-run the Release job).
+
+Until the package is on npm, Archsphere may depend via `file:../../smart-ui-components`. After `1.0.0` is published, switch to `"smart-ui-components": "^1.0.0"`.
