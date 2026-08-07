@@ -142,4 +142,39 @@ describe("DatasetPicker", () => {
     fireEvent.click(screen.getByRole("option", { name: "Not selected" }));
     expect(onChange).toHaveBeenCalledWith("");
   });
+
+  it("shows label info hint and field hint only when text is present", () => {
+    const { rerender, container } = render(
+      <DatasetPicker
+        fieldLabel="Responsible"
+        value=""
+        onChange={vi.fn()}
+        items={items}
+        labels={{ ...labels, hint: "" }}
+        labelHint="Who owns delivery"
+        labelInfoAria="More info"
+        hint="Pick carefully"
+      />
+    );
+
+    expect(screen.getByRole("button", { name: "More info" })).toBeTruthy();
+    expect(screen.getByText("Pick carefully")).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "Choose…" }));
+    expect(container.querySelector(".suc-dataset-picker__hint")).toBeNull();
+
+    rerender(
+      <DatasetPicker
+        fieldLabel="Responsible"
+        value=""
+        onChange={vi.fn()}
+        items={items}
+        labels={labels}
+        labelHint="   "
+        hint="   "
+      />
+    );
+    expect(screen.queryByRole("button", { name: "More info" })).toBeNull();
+    expect(container.querySelector(".suc-dataset-picker__field-hint")).toBeNull();
+  });
 });

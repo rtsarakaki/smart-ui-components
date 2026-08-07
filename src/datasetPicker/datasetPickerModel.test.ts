@@ -3,6 +3,7 @@ import {
   filterDatasetPickerItems,
   findDatasetPickerItem,
   formatDatasetPickerRowLabel,
+  hasVisibleHint,
   initialsFromLabel,
   type DatasetPickerItem,
 } from "./datasetPickerModel.js";
@@ -62,5 +63,13 @@ describe("datasetPickerModel", () => {
     expect(initialsFromLabel("Ana Carolina")).toBe("AC");
     expect(initialsFromLabel("Jo")).toBe("JO");
     expect(initialsFromLabel("")).toBe("?");
+  });
+
+  it("detects visible hints", () => {
+    expect(hasVisibleHint(undefined)).toBe(false);
+    expect(hasVisibleHint("")).toBe(false);
+    expect(hasVisibleHint("   ")).toBe(false);
+    expect(hasVisibleHint("Help")).toBe(true);
+    expect(hasVisibleHint(0)).toBe(true);
   });
 });

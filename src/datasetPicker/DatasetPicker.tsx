@@ -15,16 +15,24 @@ import {
   filterDatasetPickerItems,
   findDatasetPickerItem,
   formatDatasetPickerRowLabel,
+  hasVisibleHint,
   initialsFromLabel,
   type DatasetPickerClassNames,
   type DatasetPickerItem,
   type DatasetPickerLabels,
   type DatasetPickerTypeOption,
 } from "./datasetPickerModel.js";
+import { FieldLabelWithHint } from "../fieldLabel/FieldLabelWithHint.js";
 
 const DEFAULT_CLASS_NAMES: DatasetPickerClassNames = {
   field: "suc-dataset-picker",
   fieldLabel: "suc-dataset-picker__label",
+  fieldLabelRow: "suc-dataset-picker__label-row",
+  fieldLabelInfoHint: "suc-dataset-picker__label-info",
+  fieldLabelInfoBtn: "suc-dataset-picker__label-info-btn",
+  fieldLabelInfoIcon: "suc-dataset-picker__label-info-icon",
+  fieldLabelInfoTooltip: "suc-dataset-picker__label-info-tooltip",
+  fieldHint: "suc-dataset-picker__field-hint",
   trigger: "suc-dataset-picker__trigger",
   triggerValue: "suc-dataset-picker__trigger-value",
   triggerLabel: "suc-dataset-picker__trigger-label",
@@ -94,6 +102,10 @@ export type DatasetPickerProps = {
   allowEmpty?: boolean;
   disabled?: boolean;
   showLeadingVisual?: boolean;
+  /** Info tooltip next to the field label — shown only when non-empty. */
+  labelHint?: string;
+  labelInfoAria?: string;
+  /** Helper text under the trigger — shown only when non-empty. */
   hint?: ReactNode;
   classNames?: Partial<DatasetPickerClassNames>;
   hostClassNames?: Partial<DatasetPickerClassNames>;
@@ -109,6 +121,8 @@ export function DatasetPicker({
   allowEmpty = true,
   disabled = false,
   showLeadingVisual = true,
+  labelHint,
+  labelInfoAria,
   hint,
   classNames,
   hostClassNames,
@@ -183,7 +197,19 @@ export function DatasetPicker({
   return (
     <>
       <div className={styles.field}>
-        <span className={styles.fieldLabel}>{fieldLabel}</span>
+        <FieldLabelWithHint
+          label={fieldLabel}
+          hint={labelHint}
+          infoAria={labelInfoAria}
+          hostClassNames={{
+            label: styles.fieldLabel,
+            labelRow: styles.fieldLabelRow,
+            infoHint: styles.fieldLabelInfoHint,
+            infoBtn: styles.fieldLabelInfoBtn,
+            infoIcon: styles.fieldLabelInfoIcon,
+            infoTooltip: styles.fieldLabelInfoTooltip,
+          }}
+        />
         <div className={styles.trigger}>
           <span className={styles.triggerValue}>
             {selectedItem ? (
@@ -215,7 +241,7 @@ export function DatasetPicker({
             {labels.chooseButton}
           </button>
         </div>
-        {hint}
+        {hasVisibleHint(hint) ? <span className={styles.fieldHint}>{hint}</span> : null}
       </div>
 
       {pickerOpen && typeof document !== "undefined"
@@ -235,7 +261,9 @@ export function DatasetPicker({
                 onPointerDown={(event) => event.stopPropagation()}
               >
                 <h2 className={styles.dialogTitle}>{labels.dialogTitle}</h2>
-                {labels.hint ? <p className={styles.dialogHint}>{labels.hint}</p> : null}
+                {hasVisibleHint(labels.hint) ? (
+                  <p className={styles.dialogHint}>{labels.hint}</p>
+                ) : null}
                 <div className={styles.filters}>
                   {showTypeFilter ? (
                     <label className="field">

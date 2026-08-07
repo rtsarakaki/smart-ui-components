@@ -1,7 +1,7 @@
 {
   "name": "@arqueosfera/smart-ui-components",
-  "version": "1.1.0",
-  "description": "Reusable React UI controls — DataGrid, DatasetPicker, and related list primitives",
+  "version": "1.2.0",
+  "description": "Reusable React UI controls — DataGrid, DatasetPicker, MarkdownEditor, and related primitives",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -67,6 +67,7 @@
     "ui",
     "datagrid",
     "picker",
+    "markdown",
     "pagination",
     "typescript",
     "components"

@@ -55,6 +55,8 @@ Generic “choose one item from a dataset” field (participant picker pattern):
 - **Description** search field is always present
 - **Type** filter is optional (`typeOptions`)
 - Items are passed as a plain `items` dataset (`id`, `label`, `description?`, `type?`, `imageUrl?`)
+- **Label hint** (`labelHint`) — info tooltip next to the field label when text is present
+- **Field hint** (`hint`) — helper under the trigger; omitted when empty
 
 ```tsx
 import { DatasetPicker } from "@arqueosfera/smart-ui-components";
@@ -69,6 +71,36 @@ import { DatasetPicker } from "@arqueosfera/smart-ui-components";
     { value: "stakeholder", label: "Stakeholder" },
   ]}
   labels={{ /* i18n strings */ }}
+/>
+```
+
+### `MarkdownEditor`
+
+Markdown field with an action toolbar:
+
+- Edit / preview mode toggle
+- Optional **copy** and **download** export actions
+- Optional **expand** toggle (controlled via `expanded` / `onExpandedChange`)
+- Host supplies `renderPreview` (markdown engine stays in the app)
+- Hint shows only when text/node is provided (`editHint` / `previewHint` / `hint`)
+
+```tsx
+import { MarkdownEditor } from "@arqueosfera/smart-ui-components";
+
+<MarkdownEditor
+  value={markdown}
+  onChange={setMarkdown}
+  label={<span>Description</span>}
+  fieldAriaLabel="Description"
+  previewEmptyMessage="Nothing to preview"
+  editModeAria="Edit"
+  previewModeAria="Preview"
+  renderPreview={(content) => <YourMarkdown content={content} />}
+  exportActions={{
+    copyLabel: "Copy",
+    downloadLabel: "Download",
+    downloadFilename: "notes.md",
+  }}
 />
 ```
 

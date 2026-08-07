@@ -38,6 +38,12 @@ export type DatasetPickerLabels = {
 export type DatasetPickerClassNames = {
   field: string;
   fieldLabel: string;
+  fieldLabelRow: string;
+  fieldLabelInfoHint: string;
+  fieldLabelInfoBtn: string;
+  fieldLabelInfoIcon: string;
+  fieldLabelInfoTooltip: string;
+  fieldHint: string;
   trigger: string;
   triggerValue: string;
   triggerLabel: string;
@@ -56,6 +62,14 @@ export type DatasetPickerClassNames = {
   avatarImage: string;
   avatarPlaceholder: string;
 };
+
+/** True when a hint should be rendered (non-empty string or any React node). */
+export function hasVisibleHint(hint: unknown): boolean {
+  if (hint == null || hint === false) return false;
+  if (typeof hint === "string") return hint.trim().length > 0;
+  if (typeof hint === "number") return true;
+  return true;
+}
 
 export function filterDatasetPickerItems(
   items: ReadonlyArray<DatasetPickerItem>,

@@ -28,6 +28,7 @@ export {
   filterDatasetPickerItems,
   findDatasetPickerItem,
   formatDatasetPickerRowLabel,
+  hasVisibleHint,
   initialsFromLabel,
 } from "./datasetPicker/datasetPickerModel.js";
 export type {
@@ -36,3 +37,20 @@ export type {
   DatasetPickerLabels,
   DatasetPickerTypeOption,
 } from "./datasetPicker/datasetPickerModel.js";
+export { FieldLabelWithHint } from "./fieldLabel/FieldLabelWithHint.js";
+export type {
+  FieldLabelWithHintClassNames,
+  FieldLabelWithHintProps,
+} from "./fieldLabel/FieldLabelWithHint.js";
+export { MarkdownEditor } from "./markdownEditor/MarkdownEditor.js";
+export type { MarkdownEditorProps } from "./markdownEditor/MarkdownEditor.js";
+export { resolveMarkdownEditorInitialMode } from "./markdownEditor/markdownEditorModel.js";
+export type {
+  MarkdownEditorClassNames,
+  MarkdownEditorExportActions,
+  MarkdownEditorMode,
+} from "./markdownEditor/markdownEditorModel.js";
+export {
+  copyMarkdownToClipboard,
+  downloadMarkdownFile,
+} from "./markdownEditor/markdownExport.js";
